@@ -2,18 +2,18 @@
 
 Game::Game() {}
 
-void Game::changePlayer()
+void Game::change_player()
 {
 	// O <-> X
 	currPlayer = (currPlayer == Piece::X) ? Piece::O : Piece::X;
 }
 
-Status Game::getGameStatus(Piece piece) const
+Status Game::get_game_status(Piece piece) const
 {
 	return (piece == Piece::X) ? Status::X_WIN : Status::O_WIN;
 }
 
-Status Game::checkGameStatus()
+Status Game::check_game_status()
 {
 	// Init piece variable
 	Piece piece;
@@ -26,7 +26,7 @@ Status Game::checkGameStatus()
 		if (piece != Piece::EMPTY && piece == board.state[x][1] && board.state[x][1] == board.state[x][2])
 		{
 			winLine = {Coord(x, 0), Coord(x, 1), Coord(x, 2)};
-			return getGameStatus(piece);
+			return get_game_status(piece);
 		}
 	}
 
@@ -38,7 +38,7 @@ Status Game::checkGameStatus()
 		if (piece != Piece::EMPTY && piece == board.state[1][y] && board.state[1][y] == board.state[2][y])
 		{
 			winLine = {Coord(0, y), Coord(1, y), Coord(2, y)};
-			return getGameStatus(piece);
+			return get_game_status(piece);
 		}
 	}
 
@@ -48,14 +48,14 @@ Status Game::checkGameStatus()
 	if (piece != Piece::EMPTY && piece == board.state[1][1] && board.state[1][1] == board.state[2][2])
 	{
 		winLine = {Coord(0, 0), Coord(1, 1), Coord(2, 2)};
-		return getGameStatus(piece);
+		return get_game_status(piece);
 	}
 
 	piece = board.state[0][2];
 	if (piece != Piece::EMPTY && piece == board.state[1][1] && board.state[1][1] == board.state[2][0])
 	{
 		winLine = {Coord(0, 2), Coord(1, 1), Coord(2, 0)};
-		return getGameStatus(piece);
+		return get_game_status(piece);
 	}
 
 
@@ -76,13 +76,13 @@ Status Game::checkGameStatus()
 	return Status::DRAW;
 }
 
-void Game::playTurn(int x, int y)
+void Game::play_turn(int x, int y)
 {
 	// If game over, reset game
 	if (gameStatus != Status::IN_PROGRESS)
 	{
 		board.clear();
-		setGameStatus(Status::IN_PROGRESS);
+		set_game_status(Status::IN_PROGRESS);
 		currPlayer = DEFAULT_PLAYER;
 	}
 
@@ -94,8 +94,8 @@ void Game::playTurn(int x, int y)
 
 	// Play turn
 	board.state[x][y] = currPlayer;
-	changePlayer();
+	change_player();
 
 	// Check if game over
-	setGameStatus(checkGameStatus());
+	set_game_status(check_game_status());
 }

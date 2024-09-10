@@ -21,14 +21,14 @@ class Game
 {
 	private:
 		Piece currPlayer = DEFAULT_PLAYER;
-		void changePlayer();
-		Status checkGameStatus();
-		void setGameStatus(Status status) { gameStatus = status; };
-		Status getGameStatus(Piece piece) const;
+		void change_player();
+		Status check_game_status();
+		void set_game_status(Status status) { gameStatus = status; };
+		Status get_game_status(Piece piece) const;
 	
 	public:
 		Game();
-		void playTurn(int x, int y);
+		void play_turn(int x, int y);
 		Board board = Board(3, 3);
 		Status gameStatus = IN_PROGRESS;
 		std::vector<Coord> winLine;

@@ -3,21 +3,21 @@
 
 Draw::Draw(sf::RenderWindow& w, Assets& assets) : window(w)
 {
-    sf::Sprite board(*assets.getTexture("BOARD"));
-    sf::Sprite x(*assets.getTexture("X"));
-    sf::Sprite o(*assets.getTexture("O"));
+    sf::Sprite board(*assets.get_texture("BOARD"));
+    sf::Sprite x(*assets.get_texture("X"));
+    sf::Sprite o(*assets.get_texture("O"));
 
     this->boardSprite = board;
     this->XSprite = x;
     this->OSprite = o;
 }
 
-void Draw::drawBoard() const
+void Draw::draw_board() const
 {
     window.draw(boardSprite);
 }
 
-void Draw::drawPieces(std::vector<std::vector<Piece>> board)
+void Draw::draw_pieces(std::vector<std::vector<Piece>> board)
 {
     // Draw pieces
     for (int i = 0; i < 3; i++)
@@ -38,7 +38,7 @@ void Draw::drawPieces(std::vector<std::vector<Piece>> board)
     }
 }
 
-void Draw::drawAnimation(Animation& animation) const
+void Draw::draw_animation(Animation& animation) const
 {
     for (auto& sprite : animation.sprites)
     {   

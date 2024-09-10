@@ -3,8 +3,8 @@
 WinAnimation::WinAnimation(Assets& assets, int ls, int c, Status status, std::vector<std::vector<Piece>> boardState, std::vector<Coord>& line) : Animation(ls), gameStatus(status), winLine(line), cycle(c)
 {
     // Load sprites
-    sf::Sprite XSprite(*assets.getTexture("X"));
-    sf::Sprite OSprite(*assets.getTexture("O"));
+    sf::Sprite XSprite(*assets.get_texture("X"));
+    sf::Sprite OSprite(*assets.get_texture("O"));
 
     // Copy board state
     Piece piece;

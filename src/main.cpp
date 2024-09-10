@@ -8,21 +8,21 @@
 #include "win_animation.hpp"
 
 
-int getRelPos(int n)
+int get_rel_pos(int n)
 {
 	// 0: 0-195, 1: 196-345, 2: 346-540
 	return (n <= 195) ? 0 : (n <= 345) ? 1 : 2;
 }
 
-std::tuple<int, int> getMouseCoords(sf::RenderWindow& window)
+std::tuple<int, int> get_mouse_coords(sf::RenderWindow& window)
 {
 	sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-	return std::make_tuple(getRelPos(mousePos.x), getRelPos(mousePos.y));
+	return std::make_tuple(get_rel_pos(mousePos.x), get_rel_pos(mousePos.y));
 }
 
-void gameOverAnimation(sf::RenderWindow& window, Game& game, Draw& draw, Assets& assets)
+void play_game_over_animation(sf::RenderWindow& window, Game& game, Draw& draw, Assets& assets)
 {
-	WinAnimation animation = WinAnimation(assets, 54, 6, game.gameStatus, game.board.state, game.winLine);
+	WinAnimation animation = WinAnimation(assets, 42, 6, game.gameStatus, game.board.state, game.winLine);
 
 	while (window.isOpen())
 	{
@@ -38,8 +38,8 @@ void gameOverAnimation(sf::RenderWindow& window, Game& game, Draw& draw, Assets&
 
 		// Draw
 		window.clear(sf::Color::Black);
-		draw.drawBoard();
-		draw.drawAnimation(animation);
+		draw.draw_board();
+		draw.draw_animation(animation);
 		window.display();
 
 		// Update animation
@@ -52,11 +52,11 @@ void gameOverAnimation(sf::RenderWindow& window, Game& game, Draw& draw, Assets&
 	}
 }
 
-void loadSprites(Assets& assets)
+void load_sprites(Assets& assets)
 {
 	for (const auto& [name, path] : TEXTURES)
 	{
-		assets.loadTexture(name, path);
+		assets.load_texture(name, path);
 	}
 
 	std::cout << "Sprites loaded\n";
@@ -71,14 +71,14 @@ int main()
 	Assets assets;
 
 	// Load sprites
-	loadSprites(assets);
+	load_sprites(assets);
 
 	// Game and draw objects
 	Game game;
 	Draw draw(window, assets);
 
 	// Start by drawing board
-	draw.drawBoard();
+	draw.draw_board();
 	window.display();
 
 	// Relative mouse coordinates
@@ -104,24 +104,24 @@ int main()
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 				{
 					// Get mouse position
-					std::tie(x, y) = getMouseCoords(window);
+					std::tie(x, y) = get_mouse_coords(window);
 
 					// Play turn
-					game.playTurn(x, y);
+					game.play_turn(x, y);
 
 					// Draw board and pieces
 					window.clear();
-					draw.drawBoard();
-					draw.drawPieces(game.board.state);
+					draw.draw_board();
+					draw.draw_pieces(game.board.state);
 					window.display();
 
 					// If game over, play animation
 					if (game.gameStatus != Status::IN_PROGRESS)
 					{
-						gameOverAnimation(window, game, draw, assets);
+						play_game_over_animation(window, game, draw, assets);
 
 						// End by drawing empty board
-						draw.drawBoard();
+						draw.draw_board();
 						window.display();
 					}
 				}	

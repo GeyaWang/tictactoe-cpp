@@ -11,8 +11,8 @@ class Assets
 
     public:
         Assets();
-        void loadTexture(const std::string& name, const std::string& filepath);
-        sf::Texture* getTexture(const std::string& name);
+        void load_texture(const std::string& name, const std::string& filepath);
+        sf::Texture* get_texture(const std::string& name);
 };
 
 #endif

@@ -3,7 +3,7 @@
 
 Assets::Assets() {}
 
-void Assets::loadTexture(const std::string& name, const std::string& filepath)
+void Assets::load_texture(const std::string& name, const std::string& filepath)
 {
     sf::Texture texture;
 
@@ -16,7 +16,7 @@ void Assets::loadTexture(const std::string& name, const std::string& filepath)
     textures[name] = texture;
 }
 
-sf::Texture* Assets::getTexture(const std::string& name)
+sf::Texture* Assets::get_texture(const std::string& name)
 {
     auto it = textures.find(name);
     if (it != textures.end())

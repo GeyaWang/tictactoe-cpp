@@ -19,9 +19,9 @@ class Draw
 
     public:
         Draw(sf::RenderWindow& window, Assets& assets);
-        void drawBoard() const;
-        void drawPieces(std::vector<std::vector<Piece>> board);
-        void drawAnimation(Animation& animation) const;
+        void draw_board() const;
+        void draw_pieces(std::vector<std::vector<Piece>> board);
+        void draw_animation(Animation& animation) const;
 };
 
 #endif
