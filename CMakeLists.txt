@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.5)
+project(ticktactoe VERSION 1.0)
+set(CMAKE_CXX_STANDARD 17)
+set(EXEC tictactoe)
+include_directories(includes)
+file(GLOB SOURCES src/*.cpp)
+add_executable(${EXEC} ${SOURCES})
+target_link_libraries(${EXEC} sfml-graphics sfml-window sfml-system)
